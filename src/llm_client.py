@@ -8,7 +8,7 @@ from openai import OpenAI
 
 load_dotenv()
 
-_DEFAULT_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
+_DEFAULT_MODEL = os.getenv("LLM_MODEL") or "gpt-4o-mini"
 _client: OpenAI | None = None
 
 
