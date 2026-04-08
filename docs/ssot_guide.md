@@ -96,7 +96,9 @@ Use this decision table.
 - Agent operating behavior -> `program.md` or `CLAUDE.md`
 - Product scope -> `docs/public_db_adaptation.md`
 - Scoring and gates -> `docs/evaluation_framework.md`
+- Architecture compliance and process quality -> `docs/troubleshooting.md`
 - Work decomposition -> `docs/wbs_v0.1.md`
+- Improvement attempt history -> `docs/improvement_log.md`
 - Collaboration and Git process -> `CONTRIBUTING.md`
 - Tunable constants -> config file under a dedicated config directory
 - Dataset schema notes -> docs or structured metadata file, not prompt text alone
