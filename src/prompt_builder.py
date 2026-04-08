@@ -14,9 +14,17 @@ def build_system_prompt(schema: dict[str, dict[str, str]]) -> str:
 Database schema:
 {schema_text}
 
+Agency name aliases (always use the full name in SQL, never abbreviations):
+- DoD, DOD → Department of Defense
+- HHS → Department of Health and Human Services
+- DHS → Department of Homeland Security
+- GSA → General Services Administration
+- NASA → NASA
+
 Rules:
 - Write valid DuckDB SQL only.
 - Return ONLY the SQL query, nothing else. No explanations.
+- CRITICAL: Always use the FULL agency name in WHERE clauses, never abbreviations. Example: WHERE awarding_agency_name = 'Department of Homeland Security', NOT 'DHS'.
 - Use fiscal_year column for fiscal year filters (integer, e.g. 2024).
 - Use awarding_agency_name for agency filters.
 - Use total_obligation for obligation amounts, total_outlay for outlay amounts.
