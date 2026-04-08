@@ -1,6 +1,26 @@
 from __future__ import annotations
 
+from pathlib import Path
+
+import yaml
+
 from src.ir import QuestionIR
+
+_GLOSSARY_PATH = Path(__file__).resolve().parent.parent / "config" / "glossary.yaml"
+
+
+def _load_glossary_notes() -> list[str]:
+    """Load sql_note fields from glossary for inclusion in prompt."""
+    if not _GLOSSARY_PATH.exists():
+        return []
+    with open(_GLOSSARY_PATH) as f:
+        data = yaml.safe_load(f)
+    notes = []
+    for term, info in data.get("terms", {}).items():
+        note = info.get("sql_note")
+        if note:
+            notes.append(f"- {term}: {note}")
+    return notes
 
 
 def build_system_prompt(schema: dict[str, dict[str, str]], ir: QuestionIR) -> str:
@@ -29,8 +49,18 @@ def build_system_prompt(schema: dict[str, dict[str, str]], ir: QuestionIR) -> st
             hints.append(f"Metric: use {ir.metric['expression']}")
         elif ir.metric.get("column"):
             hints.append(f"Metric column: {ir.metric['column']}")
+    if ir.scope.get("subagency"):
+        hints.append(f"Subagency filter: awarding_sub_agency_name = '{ir.scope['subagency']}'")
 
     hints_text = "\n".join(f"- {h}" for h in hints) if hints else "- No specific hints derived from question"
+
+    # Glossary notes
+    glossary_notes = _load_glossary_notes()
+    glossary_text = "\n".join(glossary_notes) if glossary_notes else ""
+
+    data_notes = f"""
+Data notes:
+{glossary_text}""" if glossary_text else ""
 
     return f"""You are a SQL expert for a DuckDB database containing USAspending federal contract data.
 
@@ -39,11 +69,12 @@ Database schema:
 
 Interpreted context from the question:
 {hints_text}
-
+{data_notes}
 Rules:
 - Write valid DuckDB SQL only.
 - Return ONLY the SQL query, nothing else. No explanations.
 - Use the interpreted context above to guide your query.
+- Use ILIKE with % wildcards for recipient/company name matching.
 - If the question is ambiguous about which metric to use, respond with exactly: CLARIFY: <reason>
 - If the question cannot be answered from the schema, respond with exactly: ABSTAIN: <reason>"""
 

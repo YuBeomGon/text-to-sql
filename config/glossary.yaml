@@ -15,3 +15,12 @@ terms:
     definition: "The federal agency that awarded the contract. Use awarding_agency_name column."
   prime_award:
     definition: "A direct federal contract (not a subaward). The contracts table contains only prime awards."
+    sql_note: "No need to filter for prime — all rows are prime awards."
+
+  active_award:
+    definition: "Award status is not available in this dataset. The award_status column does not exist."
+    sql_note: "Cannot filter by active/closed status. If asked, return all rows."
+
+  subagency:
+    definition: "Sub-unit within an awarding agency. Column: awarding_sub_agency_name."
+    sql_note: "Use awarding_sub_agency_name for subagency filters."
