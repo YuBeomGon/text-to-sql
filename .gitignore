@@ -1,0 +1,21 @@
+# Data files (large, not committed)
+datasets/*.csv
+datasets/*.parquet
+datasets/*.zip
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+
+# DuckDB
+*.duckdb
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
