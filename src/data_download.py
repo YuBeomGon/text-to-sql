@@ -8,7 +8,7 @@ from pathlib import Path
 import httpx
 
 _API_BASE = "https://api.usaspending.gov/api/v2"
-_DOWNLOAD_TIMEOUT = 600
+_DOWNLOAD_TIMEOUT = 1800  # 30 min — DoD alone can take 10-20 min
 
 
 def build_download_request(
