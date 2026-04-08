@@ -1,0 +1,38 @@
+[project]
+name = "public-nl2sql-harness"
+goal = "high-precision public-data NL2SQL with DuckDB in-memory"
+
+[[agents]]
+name = "foundation"
+focus = "bootstrap, loader, executor, config"
+ownership = ["src/foundation", "src/data", "src/executor", "tests/test_foundation.py"]
+
+[[agents]]
+name = "data-eval"
+focus = "hard cases, scoring, reports, locked set"
+ownership = ["eval", "datasets", "tests/test_eval.py"]
+
+[[agents]]
+name = "semantics"
+focus = "schema, glossary, metric, time, scope, entity interpretation"
+ownership = ["src/semantics", "tests/test_semantics.py"]
+
+[[agents]]
+name = "generator"
+focus = "prompt pack, IR to SQL, rendering"
+ownership = ["src/generator", "tests/test_generator.py"]
+
+[[agents]]
+name = "verifier"
+focus = "schema checks, semantic checks, repair loop"
+ownership = ["src/verifier", "tests/test_verifier.py"]
+
+[[agents]]
+name = "policy"
+focus = "clarify, abstain, uncertainty routing"
+ownership = ["src/policy", "tests/test_policy.py"]
+
+[[agents]]
+name = "bench"
+focus = "latency, robustness, benchmark output"
+ownership = ["bench", "tests/test_bench.py"]

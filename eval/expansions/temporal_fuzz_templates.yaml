@@ -1,0 +1,9 @@
+temporal_fuzz:
+  - anchor: "this fiscal year"
+    variants: ["current FY", "this FY", "fiscal year to date"]
+  - anchor: "last fiscal year"
+    variants: ["previous FY", "prior fiscal year"]
+  - anchor: "the first half of fiscal year 2025"
+    variants: ["FY25 H1", "first six months of FY 2025"]
+  - anchor: "the most recent quarter"
+    variants: ["latest quarter", "last completed quarter"]

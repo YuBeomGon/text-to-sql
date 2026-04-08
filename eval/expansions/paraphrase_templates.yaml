@@ -1,0 +1,17 @@
+paraphrase_sets:
+  fiscal_year:
+    - "this fiscal year"
+    - "the current fiscal year"
+    - "FY to date"
+  calendar_half:
+    - "the first half of 2025"
+    - "H1 2025"
+    - "January through June 2025"
+  obligation:
+    - "obligations"
+    - "obligated dollars"
+    - "committed contract dollars"
+  recipient:
+    - "recipient"
+    - "vendor"
+    - "contractor"

@@ -1,0 +1,7 @@
+adversarial_prompts:
+  - template: "Who got the most money from {agency} last year?"
+    should_clarify: [metric_definition, time_axis]
+  - template: "Show the biggest contracts for {agency}."
+    should_clarify: [metric_definition, scope_state]
+  - template: "What did {recipient} receive?"
+    should_clarify: [metric_definition]
