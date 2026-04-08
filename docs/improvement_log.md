@@ -70,3 +70,14 @@ Read this file before starting a new improvement to avoid repeating failed appro
   - missingness_linked: 2/4 (50%)
   - scope_state: 0/4 (0%)
 - **Next**: attack scope_state (0%) first, then join_aggregation (25%)
+
+### 2026-04-09 — kept: glossary notes + subagency detection + ILIKE hint
+- **Target**: scope_state (0%), join_aggregation (25%)
+- **Change**: added sql_note fields to glossary.yaml (prime=all rows, no status column, subagency column), prompt_builder loads glossary notes, scope_interpreter detects subagency, added ILIKE hint to prompt rules
+- **Before**: 36/50 (72%)
+- **After**: 38/50 (76%)
+- **Regressions**: missingness_linked 2/4 → 1/4 (-1)
+- **Improvements**: easy_baseline +1, join_aggregation +2
+- **Unresolved**: scope_state still 0/4, missingness regression
+- **Why kept**: net +2, but need to investigate missingness regression
+- **Commit**: ba170ea
