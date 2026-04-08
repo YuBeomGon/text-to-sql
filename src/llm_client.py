@@ -3,12 +3,14 @@ from __future__ import annotations
 import os
 import re
 
+from pathlib import Path
+
 from dotenv import load_dotenv
 from openai import OpenAI
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
-_DEFAULT_MODEL = os.getenv("LLM_MODEL") or "gpt-4o-mini"
+_DEFAULT_MODEL = os.getenv("LLM_MODEL", "gpt-4o-mini")
 _client: OpenAI | None = None
 
 
