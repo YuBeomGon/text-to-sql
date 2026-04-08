@@ -58,3 +58,15 @@ Read this file before starting a new improvement to avoid repeating failed appro
 - **After**: 19/20 (95%)
 - **Why kept**: config-based fix, AC-3 compliant. Remaining failure (EASY-011) is DoD data not downloaded.
 - **Commit**: f76c703
+
+### 2026-04-09 — baseline: 50-case smoke test
+- **Target**: all categories
+- **Change**: expanded smoke test from 20 to 50 cases (20 easy + 20 hard answer + 10 clarify)
+- **Score**: 36/50 (72%)
+  - easy_baseline: 19/20 (95%)
+  - entity_resolution: 3/4 (75%)
+  - join_aggregation: 1/4 (25%)
+  - metric_ambiguity: 11/14 (79%)
+  - missingness_linked: 2/4 (50%)
+  - scope_state: 0/4 (0%)
+- **Next**: attack scope_state (0%) first, then join_aggregation (25%)
