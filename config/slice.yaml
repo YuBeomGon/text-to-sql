@@ -1,0 +1,20 @@
+data_slice:
+  source: usaspending
+  domain: contracts
+  fiscal_years: [2024, 2025]
+  core_agencies:
+    - "Department of Defense"
+    - "Department of Health and Human Services"
+    - "NASA"
+    - "Department of Homeland Security"
+    - "General Services Administration"
+  extended_agencies:
+    - "Department of Veterans Affairs"
+    - "Department of Energy"
+    - "Department of Transportation"
+  db_engine: duckdb_memory
+
+paths:
+  datasets_dir: "datasets"
+  eval_cases_dir: "eval/cases"
+  gold_snapshot: "eval/cases/gold_result_snapshot_template.jsonl"
