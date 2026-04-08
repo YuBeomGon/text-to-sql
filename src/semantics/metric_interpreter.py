@@ -52,28 +52,39 @@ def interpret_metric(ir: QuestionIR) -> QuestionIR:
                 ir.clarify_reason = f"Ambiguous metric term: {term}"
                 return ir
 
+    # Detect aggregation type from keywords in the question
+    agg_keywords = config.get("aggregation_keywords", {})
+    detected_agg = "SUM"  # default
+    for keyword, agg_type in sorted(agg_keywords.items(), key=lambda x: len(x[0]), reverse=True):
+        if re.search(rf"\b{re.escape(keyword)}\b", question_lower):
+            detected_agg = agg_type
+            break
+
     # Check for specific metric terms
     term_mappings = config.get("term_mappings", {})
     metrics = config.get("metrics", {})
     for term, metric_key in sorted(term_mappings.items(), key=lambda x: len(x[0]), reverse=True):
         if re.search(rf"\b{re.escape(term)}\b", question_lower):
             metric_info = metrics.get(metric_key, {})
+            column = metric_info.get("column", "total_obligation")
             ir.metric = {
                 "type": "aggregate",
-                "column": metric_info.get("column", "total_obligation"),
-                "aggregation": metric_info.get("aggregation", "SUM"),
-                "expression": f"{metric_info.get('aggregation', 'SUM')}({metric_info.get('column', 'total_obligation')})",
+                "column": column,
+                "aggregation": detected_agg,
+                "expression": f"{detected_agg}({column})",
             }
             return ir
 
-    # Default for aggregation keywords
-    if re.search(r"\btotal\b|\bsum\b|\bmax\b|\bmin\b|\baverage\b|\bavg\b", question_lower):
+    # If an aggregation keyword was found but no specific metric term,
+    # default to obligation with the detected aggregation
+    if detected_agg != "SUM" or re.search(r"\btotal\b|\bsum\b", question_lower):
         default_metric = metrics.get("obligation", {})
+        column = default_metric.get("column", "total_obligation")
         ir.metric = {
             "type": "aggregate",
-            "column": default_metric.get("column", "total_obligation"),
-            "aggregation": "SUM",
-            "expression": f"SUM({default_metric.get('column', 'total_obligation')})",
+            "column": column,
+            "aggregation": detected_agg,
+            "expression": f"{detected_agg}({column})",
         }
 
     return ir

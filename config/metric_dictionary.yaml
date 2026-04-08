@@ -28,6 +28,23 @@ term_mappings:
   "award amount": "award_amount"
   "contract value": "award_amount"
 
+# Aggregation keywords that modify how a metric is computed
+aggregation_keywords:
+  "total": "SUM"
+  "sum": "SUM"
+  "average": "AVG"
+  "avg": "AVG"
+  "mean": "AVG"
+  "maximum": "MAX"
+  "max": "MAX"
+  "largest": "MAX"
+  "biggest": "MAX"
+  "highest": "MAX"
+  "minimum": "MIN"
+  "min": "MIN"
+  "smallest": "MIN"
+  "lowest": "MIN"
+
 ambiguous_terms:
   - "amount"
   - "money"
