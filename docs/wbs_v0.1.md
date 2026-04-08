@@ -2,24 +2,24 @@
 
 ## Milestone M0 - Foundation
 
-- [ ] Create repository skeleton for `src/`, `tests/`, `eval/`, `datasets/`, `harness/`, `docs/`
-- [ ] Add DuckDB in-memory bootstrap module
-- [ ] Add config for data slice selection: fiscal years, agencies, award type
-- [ ] Add dataset loader for public USAspending contract slice
-- [ ] Add raw schema inspection utility
-- [ ] Add base query executor
-- [ ] Add evaluation harness skeleton
-- [ ] Add quick/full score CLI contract
+- [x] Create repository skeleton for `src/`, `tests/`, `eval/`, `datasets/`, `harness/`, `docs/`
+- [x] Add DuckDB in-memory bootstrap module
+- [x] Add config for data slice selection: fiscal years, agencies, award type
+- [x] Add dataset loader for public USAspending contract slice
+- [x] Add raw schema inspection utility
+- [x] Add base query executor
+- [x] Add evaluation harness skeleton
+- [x] Add quick/full score CLI contract
 
 ## Milestone M1 - Dataset and Evaluation
 
-- [ ] Normalize the 300 hard cases into a machine-readable format
-- [ ] Tag each case with polarity, failure axis, expected behavior, difficulty
-- [ ] Add result-set comparison logic
-- [ ] Add negative/ambiguous expected behavior schema
+- [x] Normalize the 300 hard cases into a machine-readable format
+- [x] Tag each case with polarity, failure axis, expected behavior, difficulty
+- [x] Add result-set comparison logic
+- [x] Add negative/ambiguous expected behavior schema
 - [ ] Add paraphrase expansion framework
 - [ ] Add temporal fuzz expansion framework
-- [ ] Add score report output format
+- [x] Add score report output format
 - [ ] Lock an initial hard regression set
 
 ## Milestone M2 - Semantic Interpretation Layer
