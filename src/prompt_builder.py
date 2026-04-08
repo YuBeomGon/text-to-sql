@@ -31,6 +31,7 @@ Rules:
 - Use recipient_name for contractor/recipient filters.
 - For "contracts" scope, filter on the contracts table directly.
 - COUNT awards means COUNT(DISTINCT award_id), not COUNT(*) of rows.
+- COUNT transactions means COUNT(*) of rows, not COUNT(DISTINCT award_id). Each row is one transaction.
 - If the question is ambiguous about which metric to use, respond with exactly: CLARIFY: <reason>
 - If the question cannot be answered from the schema, respond with exactly: ABSTAIN: <reason>"""
 
