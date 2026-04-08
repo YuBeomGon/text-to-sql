@@ -45,7 +45,9 @@ def build_system_prompt(schema: dict[str, dict[str, str]], ir: QuestionIR) -> st
         if q:
             hints.append(f"Quarter: Q{q} of FY{fy}")
     if ir.metric:
-        if ir.metric.get("expression"):
+        if ir.metric.get("type") == "row_list":
+            hints.append("This is a LIST query — return rows with SELECT *, not aggregation. Use ORDER BY and LIMIT if the question asks for 'largest', 'top', etc.")
+        elif ir.metric.get("expression"):
             hints.append(f"Metric: use {ir.metric['expression']}")
         elif ir.metric.get("column"):
             hints.append(f"Metric column: {ir.metric['column']}")

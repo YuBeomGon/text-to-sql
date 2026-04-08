@@ -20,6 +20,12 @@ def interpret_metric(ir: QuestionIR) -> QuestionIR:
     config = _load_dictionary()
     question_lower = ir.raw_question.lower()
 
+    # Check for list/show-type questions that want rows, not aggregation
+    if re.search(r"\blist\b|\bshow\b.*\bcontracts?\b|\breturn\b", question_lower):
+        if not re.search(r"\bhow many\b|\bcount\b|\btotal\b|\bsum\b|\baverage\b", question_lower):
+            ir.metric = {"type": "row_list", "expression": "SELECT *", "column": None}
+            return ir
+
     # Check for count-type questions first
     counts = config.get("counts", {})
     if re.search(r"\bhow many\b|\bcount\b|\bnumber of\b", question_lower):
