@@ -51,6 +51,10 @@ def build_system_prompt(schema: dict[str, dict[str, str]], ir: QuestionIR) -> st
             hints.append(f"Metric column: {ir.metric['column']}")
     if ir.scope.get("subagency"):
         hints.append(f"Subagency filter: awarding_sub_agency_name = '{ir.scope['subagency']}'")
+    if ir.scope.get("prime_only"):
+        hints.append("Prime contracts only: ALL rows in this table are prime awards — do NOT add any prime/sub filter.")
+    if ir.scope.get("active_only"):
+        hints.append("Active awards requested: this dataset has NO status column — return all rows without status filter.")
 
     hints_text = "\n".join(f"- {h}" for h in hints) if hints else "- No specific hints derived from question"
 
