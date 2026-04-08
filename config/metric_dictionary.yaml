@@ -1,0 +1,47 @@
+metrics:
+  obligation:
+    column: "total_obligation"
+    aggregation: "SUM"
+    description: "Total dollars obligated for the award"
+  outlay:
+    column: "total_outlay"
+    aggregation: "SUM"
+    description: "Total dollars outlayed (actually spent)"
+  award_amount:
+    column: "total_award_amount"
+    aggregation: "SUM"
+    description: "Current total value of the award"
+  transaction_obligation:
+    column: "federal_action_obligation"
+    aggregation: "SUM"
+    description: "Obligation amount for a single transaction"
+
+term_mappings:
+  "obligation": "obligation"
+  "obligations": "obligation"
+  "obligated": "obligation"
+  "outlay": "outlay"
+  "outlays": "outlay"
+  "outlayed": "outlay"
+  "spent": "outlay"
+  "spending": "obligation"
+  "award amount": "award_amount"
+  "contract value": "award_amount"
+
+ambiguous_terms:
+  - "amount"
+  - "money"
+  - "dollars"
+  - "funding"
+  - "cost"
+
+counts:
+  awards:
+    expression: "COUNT(DISTINCT award_id)"
+    description: "Number of unique awards"
+  transactions:
+    expression: "COUNT(*)"
+    description: "Number of transaction rows"
+  recipients:
+    expression: "COUNT(DISTINCT recipient_name)"
+    description: "Number of unique recipients"
