@@ -34,6 +34,30 @@ Recommended commit style:
 - `test(eval): lock recipient alias regression`
 - `docs(ssot): clarify owner of scoring thresholds`
 
+### Commit messages carry context
+
+This project does not maintain separate chat logs or decision journals.
+Instead, commit messages serve as the primary record of **why** a change was made, not just what changed.
+
+Every commit message should include:
+- **What** changed (the subject line)
+- **Why** it was done (motivation, failure mode addressed, or decision context in the body)
+- **What was considered but rejected**, if a non-obvious choice was made
+
+Example:
+```
+feat(eval): switch scorer weights to simplified M1 baseline
+
+Per-axis metrics (metric_definition, time_axis, etc.) are not computable
+until M2 modules exist. Using simplified 4-weight scheme instead of the
+full 8-weight scheme from evaluation_framework.md section 5.2.
+
+Multi-candidate generation was excluded due to cost — Phase 2 accuracy
+will rely on verification + abstain policy instead.
+```
+
+A new contributor should be able to read `git log` and reconstruct the key decisions without needing access to chat history.
+
 ## Pull request strategy
 
 Keep PRs narrow.
