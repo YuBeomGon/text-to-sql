@@ -3,9 +3,14 @@ from src.config import load_config
 
 def test_load_config_returns_core_agencies():
     cfg = load_config()
-    assert "Department of Defense" in cfg.core_agencies
     assert "NASA" in cfg.core_agencies
-    assert len(cfg.core_agencies) == 5
+    assert len(cfg.core_agencies) == 3
+
+
+def test_load_config_returns_pending_agencies():
+    cfg = load_config()
+    assert "Department of Defense" in cfg.pending_agencies
+    assert "General Services Administration" in cfg.pending_agencies
 
 
 def test_load_config_returns_fiscal_years():

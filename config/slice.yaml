@@ -2,11 +2,14 @@ data_slice:
   source: usaspending
   domain: contracts
   fiscal_years: [2025]
+  # Agencies with data downloaded and loaded
   core_agencies:
-    - "Department of Defense"
     - "Department of Health and Human Services"
     - "NASA"
     - "Department of Homeland Security"
+  # Agencies not yet downloaded (too large or timeout)
+  pending_agencies:
+    - "Department of Defense"
     - "General Services Administration"
   extended_agencies:
     - "Department of Veterans Affairs"

@@ -8,7 +8,8 @@ Initial locked data slice (core):
 - USAspending public data
 - contracts only
 - fiscal year 2025
-- 5 core awarding agencies: DoD, HHS, NASA, DHS, GSA
+- 3 core awarding agencies (downloaded): HHS, NASA, DHS
+- 2 pending agencies (not yet downloaded): DoD, GSA
 - DuckDB in-memory only
 
 Extended evaluation agencies (robustness, after foundation stabilizes):
@@ -60,6 +61,9 @@ Always prioritize:
 - Prefer result-set correctness.
 - Prefer abstain / clarify over risky answers.
 - Keep code modular so retrieval, generation, validation, and policy can evolve separately.
+- Do not hardcode business rules (agency aliases, metric mappings, count rules) in prompts. These must live in config files or dedicated modules.
+- Do not build a pipeline that sends raw questions directly to LLM. The question MUST pass through IR conversion first, even in the baseline version.
+- Architecture compliance (AC gate) must pass alongside result accuracy before accepting changes.
 
 ## Key Product Principle
 

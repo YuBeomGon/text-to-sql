@@ -155,7 +155,17 @@ recipient / agency / subagency 이름을 제대로 정규화했는지 본다.
 - repair_success_rate: 0.03
 - latency_score: 0.02
 
-### 5.3 Cost policy
+### 5.3 Architecture compliance gate
+
+결과 점수 외에 구조 정합성도 통과해야 merge 가능. 상세 설계는 `docs/troubleshooting.md` 참조.
+
+- AC-1: pipeline이 IR 변환을 거치는가
+- AC-2: entity 정규화가 코드 레벨에서 수행되는가
+- AC-3: prompt에 하드코딩된 비즈니스 규칙이 없는가
+- AC-4: metric 해석이 사전 기반인가
+- AC-5: time 해석이 규칙 기반인가
+
+### 5.4 Cost policy
 
 Multi-candidate SQL generation is excluded from this project due to cost.
 Phase 2 accuracy improvement relies on:

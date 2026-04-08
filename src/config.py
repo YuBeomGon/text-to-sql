@@ -14,6 +14,7 @@ class SliceConfig:
     domain: str
     fiscal_years: list[int]
     core_agencies: list[str]
+    pending_agencies: list[str]
     extended_agencies: list[str]
     db_engine: str
     datasets_dir: str
@@ -33,6 +34,7 @@ def load_config(path: Path | None = None) -> SliceConfig:
         domain=ds["domain"],
         fiscal_years=ds["fiscal_years"],
         core_agencies=ds["core_agencies"],
+        pending_agencies=ds.get("pending_agencies", []),
         extended_agencies=ds["extended_agencies"],
         db_engine=ds["db_engine"],
         datasets_dir=paths["datasets_dir"],
