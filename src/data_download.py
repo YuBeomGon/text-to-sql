@@ -57,13 +57,25 @@ def request_download(
     return data["status_url"]
 
 
-def poll_until_ready(status_url: str, poll_interval: int = 10) -> str:
+def poll_until_ready(status_url: str, poll_interval: int = 15) -> str:
     """Poll the status URL until the file is ready. Return the file URL."""
     elapsed = 0
+    retries = 0
+    max_retries = 3
     while elapsed < _DOWNLOAD_TIMEOUT:
-        resp = httpx.get(status_url, timeout=30)
-        resp.raise_for_status()
-        data = resp.json()
+        try:
+            resp = httpx.get(status_url, timeout=60)
+            resp.raise_for_status()
+            data = resp.json()
+            retries = 0  # reset on success
+        except (httpx.ConnectTimeout, httpx.ReadTimeout, httpx.ConnectError) as e:
+            retries += 1
+            print(f"  Connection error ({retries}/{max_retries}): {e}")
+            if retries >= max_retries:
+                raise
+            time.sleep(poll_interval)
+            elapsed += poll_interval
+            continue
 
         if data.get("status") == "finished":
             file_url = data.get("file_url")
@@ -74,6 +86,7 @@ def poll_until_ready(status_url: str, poll_interval: int = 10) -> str:
         if data.get("status") == "failed":
             raise RuntimeError(f"Download failed: {data.get('message', 'unknown')}")
 
+        print(f"  Status: {data.get('status', 'unknown')}... ({elapsed}s)")
         time.sleep(poll_interval)
         elapsed += poll_interval
 
