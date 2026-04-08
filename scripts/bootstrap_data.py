@@ -28,13 +28,18 @@ def main():
     cfg = load_config()
     dest_dir = PROJECT_ROOT / cfg.datasets_dir
 
+    # Download per-agency to avoid server timeout on large combined requests.
     # FY2025: Oct 1 2024 — Sep 30 2025
-    csv_paths = fetch_data(
-        agencies=cfg.core_agencies,
-        start_date="2024-10-01",
-        end_date="2025-09-30",
-        dest_dir=dest_dir,
-    )
+    csv_paths = []
+    for agency in cfg.core_agencies:
+        print(f"\n=== {agency} ===")
+        paths = fetch_data(
+            agencies=[agency],
+            start_date="2024-10-01",
+            end_date="2025-09-30",
+            dest_dir=dest_dir,
+        )
+        csv_paths.extend(paths)
 
     if not csv_paths:
         print("ERROR: No CSV files extracted.")
