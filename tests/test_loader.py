@@ -12,18 +12,19 @@ def _write_sample_csv(directory: Path) -> Path:
     rows = [
         {
             "award_id_piid": "AWD-T01",
+            "contract_award_unique_key": "AWD-T01-K",
             "awarding_agency_name": "NASA",
             "awarding_sub_agency_name": "JPL",
             "recipient_name": "SpaceX",
             "award_type": "contract",
-            "fiscal_year": "2024",
-            "total_obligation": "1000000.00",
-            "total_outlay": "500000.00",
-            "total_award_amount": "1200000.00",
+            "action_date_fiscal_year": "2024",
+            "federal_action_obligation": "100000.00",
+            "total_dollars_obligated": "1000000.00",
+            "total_outlayed_amount_for_overall_award": "500000.00",
+            "current_total_value_of_award": "1200000.00",
             "action_date": "2024-02-15",
             "period_of_performance_start_date": "2024-02-01",
             "naics_code": "336414",
-            "award_status": "active",
         },
     ]
     with open(filepath, "w", newline="") as f:

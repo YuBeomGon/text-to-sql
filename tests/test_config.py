@@ -10,7 +10,7 @@ def test_load_config_returns_core_agencies():
 
 def test_load_config_returns_fiscal_years():
     cfg = load_config()
-    assert cfg.fiscal_years == [2024, 2025]
+    assert cfg.fiscal_years == [2025]
 
 
 def test_load_config_returns_paths():

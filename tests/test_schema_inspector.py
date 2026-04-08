@@ -9,10 +9,11 @@ def test_get_tables_returns_contracts(sample_db):
 def test_get_columns_returns_expected_columns(sample_db):
     columns = get_columns(sample_db, "contracts")
     expected = {
-        "award_id", "awarding_agency_name", "awarding_sub_agency_name",
+        "award_id", "contract_award_unique_key",
+        "awarding_agency_name", "awarding_sub_agency_name",
         "recipient_name", "award_type", "fiscal_year",
-        "total_obligation", "total_outlay", "total_award_amount",
-        "action_date", "award_start_date", "naics_code", "award_status",
+        "federal_action_obligation", "total_obligation", "total_outlay",
+        "total_award_amount", "action_date", "award_start_date", "naics_code",
     }
     assert expected.issubset(set(columns.keys()))
 
