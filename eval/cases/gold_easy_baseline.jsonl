@@ -1,0 +1,20 @@
+{"case_id": "EASY-001", "gold_sql": "SELECT COUNT(DISTINCT award_id) FROM contracts WHERE awarding_agency_name = 'NASA' AND fiscal_year = 2024"}
+{"case_id": "EASY-002", "gold_sql": "SELECT SUM(total_obligation) FROM contracts WHERE awarding_agency_name = 'Department of Defense' AND fiscal_year = 2025"}
+{"case_id": "EASY-003", "gold_sql": "SELECT recipient_name, SUM(total_obligation) AS total FROM contracts WHERE awarding_agency_name = 'Department of Health and Human Services' AND fiscal_year = 2024 GROUP BY recipient_name ORDER BY total DESC LIMIT 10"}
+{"case_id": "EASY-004", "gold_sql": "SELECT SUM(total_obligation) FROM contracts WHERE awarding_agency_name = 'Department of Homeland Security' AND fiscal_year = 2025"}
+{"case_id": "EASY-005", "gold_sql": "SELECT COUNT(DISTINCT award_id) FROM contracts WHERE awarding_agency_name = 'General Services Administration' AND fiscal_year = 2024"}
+{"case_id": "EASY-006", "gold_sql": "SELECT SUM(total_outlay) FROM contracts WHERE awarding_agency_name = 'NASA' AND fiscal_year = 2025"}
+{"case_id": "EASY-007", "gold_sql": "SELECT * FROM contracts WHERE awarding_agency_name = 'Department of Defense' AND recipient_name ILIKE '%Lockheed Martin%' AND fiscal_year = 2024"}
+{"case_id": "EASY-008", "gold_sql": "SELECT COUNT(DISTINCT award_id) FROM contracts WHERE awarding_agency_name = 'Department of Health and Human Services' AND fiscal_year = 2025"}
+{"case_id": "EASY-009", "gold_sql": "SELECT MAX(total_obligation) FROM contracts WHERE awarding_agency_name = 'Department of Homeland Security' AND fiscal_year = 2024"}
+{"case_id": "EASY-010", "gold_sql": "SELECT COUNT(DISTINCT recipient_name) FROM contracts WHERE awarding_agency_name = 'General Services Administration' AND fiscal_year = 2025"}
+{"case_id": "EASY-011", "gold_sql": "SELECT * FROM contracts WHERE awarding_agency_name = 'Department of Defense' AND total_obligation > 10000000 AND fiscal_year = 2024"}
+{"case_id": "EASY-012", "gold_sql": "SELECT AVG(total_obligation) FROM contracts WHERE awarding_agency_name = 'NASA' AND fiscal_year = 2025"}
+{"case_id": "EASY-013", "gold_sql": "SELECT awarding_agency_name, SUM(total_obligation) AS total FROM contracts WHERE fiscal_year = 2024 GROUP BY awarding_agency_name ORDER BY total ASC LIMIT 5"}
+{"case_id": "EASY-014", "gold_sql": "SELECT COUNT(DISTINCT award_id) FROM contracts WHERE awarding_agency_name = 'Department of Health and Human Services' AND fiscal_year = 2024 AND action_date >= '2024-01-01' AND action_date <= '2024-03-31'"}
+{"case_id": "EASY-015", "gold_sql": "SELECT SUM(total_obligation) FROM contracts WHERE awarding_agency_name = 'Department of Defense' AND recipient_name ILIKE '%Boeing%' AND fiscal_year = 2025"}
+{"case_id": "EASY-016", "gold_sql": "SELECT DISTINCT awarding_agency_name FROM contracts WHERE fiscal_year = 2024"}
+{"case_id": "EASY-017", "gold_sql": "SELECT COUNT(*) FROM contracts WHERE awarding_agency_name = 'Department of Homeland Security' AND fiscal_year = 2025"}
+{"case_id": "EASY-018", "gold_sql": "SELECT awarding_agency_name, SUM(total_obligation) AS total FROM contracts WHERE fiscal_year = 2024 GROUP BY awarding_agency_name ORDER BY total DESC"}
+{"case_id": "EASY-019", "gold_sql": "SELECT COUNT(DISTINCT award_id) FROM contracts WHERE awarding_agency_name = 'General Services Administration' AND naics_code LIKE '54%'"}
+{"case_id": "EASY-020", "gold_sql": "SELECT MIN(total_obligation) FROM contracts WHERE awarding_agency_name = 'NASA' AND fiscal_year = 2024"}
