@@ -121,6 +121,35 @@ Critical ambiguity axes:
 - awarding agency vs funding agency
 - prime awards vs all awards
 
+## Autonomous Improvement Loop
+
+After the baseline pipeline is working (score.sh returns real numbers), the agent operates in this loop:
+
+1. Run `./score.sh --quick` and read per-category scores
+2. Identify the lowest-scoring category or a failing gate
+3. Decide what to try (prompt change, metadata addition, new module, etc.)
+4. Implement the smallest possible change
+5. Run `./score.sh --quick` again
+6. If score improved or held: commit with detailed why in the message
+7. If score regressed: `git checkout .` and record the failure
+8. Record the attempt in [docs/improvement_log.md](docs/improvement_log.md)
+9. Repeat
+
+### How to pick what to try next
+
+Priority order:
+1. If `risky_answer_rate > 0.02` → improve abstain/clarify policy first
+2. If `execution_success < 0.995` → fix schema grounding or SQL errors
+3. Otherwise → attack the lowest per-category accuracy score
+4. If all categories are above 0.95 → focus on paraphrase robustness and edge cases
+
+### What the agent must NOT do in this loop
+
+- Make large multi-module changes in one step
+- Delete or weaken tests to improve score
+- Ignore a regression and commit anyway
+- Skip recording the attempt in the improvement log
+
 ## Merge Gate Reminder
 
 The project should move like this:
