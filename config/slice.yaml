@@ -1,7 +1,7 @@
 data_slice:
   source: usaspending
   domain: contracts
-  fiscal_years: [2024, 2025]
+  fiscal_years: [2025]
   core_agencies:
     - "Department of Defense"
     - "Department of Health and Human Services"

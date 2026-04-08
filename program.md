@@ -7,7 +7,7 @@ Build a high-precision NL2SQL system on top of public spending data.
 Initial locked data slice (core):
 - USAspending public data
 - contracts only
-- fiscal years 2024-2025
+- fiscal year 2025
 - 5 core awarding agencies: DoD, HHS, NASA, DHS, GSA
 - DuckDB in-memory only
 

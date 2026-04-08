@@ -28,23 +28,13 @@ def main():
     cfg = load_config()
     dest_dir = PROJECT_ROOT / cfg.datasets_dir
 
-    # API limits date_range to 1 year, so download each FY separately.
-    # FY2024: Oct 1 2023 — Sep 30 2024
     # FY2025: Oct 1 2024 — Sep 30 2025
-    fy_ranges = [
-        ("2023-10-01", "2024-09-30"),
-        ("2024-10-01", "2025-09-30"),
-    ]
-    csv_paths = []
-    for start, end in fy_ranges:
-        print(f"\n--- Downloading {start} to {end} ---")
-        paths = fetch_data(
-            agencies=cfg.core_agencies,
-            start_date=start,
-            end_date=end,
-            dest_dir=dest_dir,
-        )
-        csv_paths.extend(paths)
+    csv_paths = fetch_data(
+        agencies=cfg.core_agencies,
+        start_date="2024-10-01",
+        end_date="2025-09-30",
+        dest_dir=dest_dir,
+    )
 
     if not csv_paths:
         print("ERROR: No CSV files extracted.")
