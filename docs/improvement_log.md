@@ -33,3 +33,28 @@ Read this file before starting a new improvement to avoid repeating failed appro
 - **After**: 20/20 (100%)
 - **Why kept**: fixed last easy_baseline failure, no regressions
 - **Commit**: 830d64f
+
+### 2026-04-08 — reverted: prompt patching approach
+- **Target**: all easy_baseline
+- **Change**: rolled back hardcoded agency aliases and count rules from prompt_builder.py
+- **Before**: 20/20 (100%) via prompt patching
+- **After**: baseline reset — approach violated AC-3 (no hardcoded rules in prompt)
+- **Why reverted**: prompt patching is a shortcut that doesn't scale. Architecture compliance gate (AC-1~AC-5) now enforces IR-based pipeline.
+- **Commit**: 1c0a8e5
+- **Lesson**: result score alone is insufficient — process quality (AC gate) must also pass
+
+### 2026-04-08 — kept: IR-based pipeline rebuild
+- **Target**: architecture compliance + all easy_baseline
+- **Change**: rebuilt pipeline with IR (entity_resolver → metric_interpreter → time_interpreter → scope_interpreter → ambiguity_detector → prompt_builder from IR)
+- **Before**: 0/20 (no pipeline) or 20/20 (prompt patching, reverted)
+- **After**: 16/20 (80%) — structurally correct approach
+- **Why kept**: AC-1~AC-5 all PASS. Failures are config gaps, not architecture problems.
+- **Commit**: multiple (9fd9d42 through fd6429d)
+
+### 2026-04-08 — kept: add aggregation keywords to metric dictionary
+- **Target**: easy_baseline (EASY-009, EASY-012, EASY-020)
+- **Change**: added aggregation_keywords section to metric_dictionary.yaml (average→AVG, largest→MAX, minimum→MIN), updated metric_interpreter to use detected aggregation type
+- **Before**: 16/20 (80%) — "average", "minimum", "largest" not recognized
+- **After**: 19/20 (95%)
+- **Why kept**: config-based fix, AC-3 compliant. Remaining failure (EASY-011) is DoD data not downloaded.
+- **Commit**: f76c703
