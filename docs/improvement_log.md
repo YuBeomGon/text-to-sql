@@ -81,3 +81,12 @@ Read this file before starting a new improvement to avoid repeating failed appro
 - **Unresolved**: scope_state still 0/4, missingness regression
 - **Why kept**: net +2, but need to investigate missingness regression
 - **Commit**: ba170ea
+
+### 2026-04-09 — reverted: row_list metric type detection
+- **Target**: scope_state (0%) — SCOPE-002, SCOPE-012
+- **Change**: added "list/show/return" keyword detection in metric_interpreter to set type=row_list, prompt hint to use SELECT * instead of aggregation
+- **Before**: 39/50 (78%)
+- **After**: 37/50 (74%) — REGRESSION
+- **Why reverted**: "list" and "show" keywords are too common — caught easy_baseline cases that should aggregate. Regex was too broad.
+- **Commit**: df7af54 (reverted by 6f8d07e)
+- **Lesson**: list/show detection needs to be narrower — only when combined with "contracts" and sorting context, not on all list/show questions
